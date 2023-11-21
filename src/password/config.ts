@@ -27,6 +27,7 @@ type Config = Readonly<{
       PasswordValidationRule.ContainsUpperCase,
       PasswordValidationRule.ContainsNumber,
       PasswordValidationRule.ContainsUnderscore,
+      PasswordValidationRule.DoesNotContainUserName,
     ]
   >;
 }>;
@@ -39,6 +40,7 @@ export const config: Config = {
       PasswordValidationRule.ContainsUpperCase,
       PasswordValidationRule.ContainsNumber,
       PasswordValidationRule.ContainsUnderscore,
+      PasswordValidationRule.DoesNotContainUserName,
     ],
     minLength: 8,
   },
