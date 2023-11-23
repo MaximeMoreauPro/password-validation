@@ -21,9 +21,13 @@ describe('validatePassword function', () => {
     it('when it does not contain an underscore', () => {
       expect(validatePassword('Abcdegfh1')).toBe(false);
     });
+
+    it('when it contains the username', () => {
+      expect(validatePassword('JohnDoe_1', 'JohnDoe')).toBe(false);
+    });
   });
 
   it('should return true if password is valid', () => {
-    expect(validatePassword('Ab1_12345')).toBe(true);
+    expect(validatePassword('Ab1_12345', 'JohnDoe')).toBe(true);
   });
 });

@@ -4,4 +4,5 @@ export enum PasswordValidationRule {
   ContainsUpperCase = 'ContainsUpperCase',
   ContainsNumber = 'ContainsNumber',
   ContainsUnderscore = 'ContainsUnderscore',
+  DoesNotContainUserName = 'DoesNotContainUserName',
 }

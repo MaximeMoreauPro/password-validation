@@ -35,9 +35,16 @@ describe('Password Validation feature: indicate if the password provided is vali
       fixture.whenUserProvidesPassword('Abcdegfh1');
       fixture.thenPasswordShouldBeInvalid();
     });
+
+    it('when it contains the username', () => {
+      fixture.givenTheUserNameIs('JohnDoe');
+      fixture.whenUserProvidesPassword('JohnDoe_1');
+      fixture.thenPasswordShouldBeInvalid();
+    });
   });
 
-  it('should indicate if the password is valide', () => {
+  it('should indicate if the password is valid', () => {
+    fixture.givenTheUserNameIs('JohnDoe');
     fixture.whenUserProvidesPassword('Ab1_12345');
     fixture.thenPasswordShouldBeValid();
   });

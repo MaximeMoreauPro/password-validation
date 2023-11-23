@@ -1,7 +1,7 @@
 import { PasswordValidationRule } from '../enums/PasswordValidationRule';
 import { config } from '../config';
 
-type PasswordRuleValidator = (password: string) => boolean;
+type PasswordRuleValidator = (password: string, ...args: any) => boolean;
 
 export type PasswordRuleConfigurations = {
   [PasswordValidationRule.MinLength]: { minLength: number };
@@ -9,6 +9,7 @@ export type PasswordRuleConfigurations = {
   [PasswordValidationRule.ContainsUpperCase]: {};
   [PasswordValidationRule.ContainsNumber]: {};
   [PasswordValidationRule.ContainsUnderscore]: {};
+  [PasswordValidationRule.DoesNotContainUserName]: {};
 };
 
 const haveMinimalLengh: PasswordRuleValidator = password =>
@@ -30,6 +31,15 @@ const CONTAINS_UNDERSCORE = /_/;
 const containsUnderscore: PasswordRuleValidator = password =>
   CONTAINS_UNDERSCORE.test(password);
 
+type DoesNotContainUserNameValidator = (
+  password: string,
+  userName: string,
+) => boolean;
+const doesNotContainUserName: DoesNotContainUserNameValidator = (
+  password,
+  userName,
+) => !password.includes(userName);
+
 export const AVAILABLE_PASSWORD_RULE_VALIDATORS: Readonly<
   Record<PasswordValidationRule, PasswordRuleValidator>
 > = {
@@ -38,4 +48,5 @@ export const AVAILABLE_PASSWORD_RULE_VALIDATORS: Readonly<
   [PasswordValidationRule.ContainsUpperCase]: containsUpperCase,
   [PasswordValidationRule.ContainsNumber]: containsNumber,
   [PasswordValidationRule.ContainsUnderscore]: containsUnderscore,
+  [PasswordValidationRule.DoesNotContainUserName]: doesNotContainUserName,
 };
